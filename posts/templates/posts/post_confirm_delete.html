@@ -1,0 +1,26 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+<div class="mx-auto mt-5" style="width: 400px;">
+    <div class='container'>
+        <div class='content-section'>
+            <form method='POST'>
+                {% csrf_token %}
+                <fieldset class='form-group'>
+                    <legend class='border-bottom mb-4'>
+                        Confirm Delete
+                    </legend>
+                </fieldset>
+                <h2>Are you sure you want to delete {{ object.title }} ?</h2>
+                <div class='form-group'>
+                    <button class="btn btn-outline-danger" type='submit'>
+                        Yes, Delete
+                    </button>
+                    <a href="{% url 'user-posts' %}" class="btn btn-outline-primary">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

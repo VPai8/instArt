@@ -1,0 +1,17 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+<div class="container mx-auto mt-5 w-90" id="content">
+    {% csrf_token %}
+    {% if arts %}
+    {% for art in arts %}
+    <div class="container m-3" style="border:1px solid #cecece;">
+        <a class="btn" href={% url 'edit-post' art.post.id %}>Edit</a>
+        <a class="btn" href={% url 'delete-post' art.post.id %}>Delete</a>
+      {% include "posts/singlepost.html" with post=art.post liked=art.liked likes=art.likes commentc=art.commentc %}
+    </div>
+      {% endfor %}
+    {% else %}
+    <h4>No posts yet!</h4>
+    {% endif %}
+</div>
+{% endblock %}

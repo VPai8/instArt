@@ -1,0 +1,43 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+<div class="container mx-auto mt-5 w-90" id="content">
+    {% csrf_token %}
+    {% for art in arts %}
+      {% include "posts/singlepost.html" with post=art.post liked=art.liked likes=art.likes commentc=art.commentc %}
+    {% endfor %}
+    <div>
+      <ul class="pagination">    
+        {% if page_obj.has_previous %}      
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+        </li>     
+        {% endif %}     
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+            <li class="page-item active">
+              <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+          {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}      
+        {% if page_obj.has_next %}    
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        </li>  
+        {% endif %}        
+      </ul>
+    </div>
+ </div> 
+{% endblock %}
+
+{% block search %}
+  <form class="form-inline my-2 my-lg-0" method="GET">
+    <input class="form-control mr-sm-2" name="search" value='{{ request.GET.search }}' type="text" placeholder="Find posts">
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+  </form>
+{% endblock %}  
+
+

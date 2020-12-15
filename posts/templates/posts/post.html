@@ -1,0 +1,7 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+    <div class="mx-auto mt-5" style="width: 1150px;" id="content">
+        {% csrf_token %}        
+        {% include "posts/singlepost.html" with post=art.post liked=art.liked likes=art.likes commentc=art.commentc %}        
+    </div>
+{% endblock %}

@@ -1,0 +1,57 @@
+<div class="container mb-5" style="border:1px solid #cecece;" id={{ post.id }}>
+    <div class="m-2">
+        <img class="img-fluid rounded mx-auto d-block" src="{{ post.image.url }}">
+    </div>
+    <div class="mx-auto">    
+        <div class="card mb-3">
+            <div class="card-body" >
+                <a class="card-title" href="{% url 'post' post.id %}"><h5>{{ post.title }}</h5></a>
+                by <a href="{% url 'public-profile' post.user.id %}" class="card-subtitle text-muted">{{ post.user.username }}</a>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ post.desc }}</p>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="likebtn mb-1">
+                            {% if liked %}
+                                <button data-url={% url 'unlike' post.id %} class="btn">Unlike</button>
+                            {% else %}
+                                <button data-url={% url 'like' post.id %} class="btn">Like</button>
+                            {% endif %}
+                            <h6 class="card-title ml-2 mt-2">{{ likes }} {% if likes != 1  %} likes {% else %} like {% endif %}</h6>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="comment-btn">
+                            <div class="cmt-dropdown">
+                            <button data-url={% url 'comments' post.id %} type = "button" class = "btn btn-default dropdown-toggle">
+                                Comments
+                                <span class = "caret"></span>
+                             </button>
+                            </div>
+                            <h6 class="card-title ml-2 mt-2">{{ commentc }} {% if commentc != 1  %} comments {% else %} comment {% endif %}</h6>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="share">
+                            <button class="btn" data-url={% url 'post' post.id %}>Share</button>
+                        </div>                          
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="comments">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                {{ post.last_edit }}
+            </div>
+               
+        </div>
+    </div> 
+</div> 

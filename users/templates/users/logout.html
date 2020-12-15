@@ -1,0 +1,13 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<div class="mx-auto mt-5" style="width: 450px;">
+    <div class='container'>
+            <h2>You have been logged out!</h2>
+            <div class="border-top pt-3">
+                <small class='text-muted'>
+                    <a class='ml-2' href="{% url 'user-login' %}">Log In again ?</a>
+                </small>
+            </div>
+    </div>
+</div>
+{% endblock %}

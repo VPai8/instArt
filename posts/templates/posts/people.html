@@ -1,0 +1,70 @@
+{% extends 'posts/base.html' %}
+{% block search %}
+  <form class="form-inline my-2 my-lg-0" method="GET">
+    <input class="form-control mr-sm-2" name="search" value='{{ request.GET.search }}' type="text" placeholder="Find peers">
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+  </form>
+{% endblock %}  
+
+{% block content %}
+  <div class="container">
+    {% csrf_token %}
+    <div class="row" id="people"> 
+      <div class="col-sm">
+        <div class="container">
+          {% for person in people1 %}
+            <div class="media mt-4">              
+              <img class="img-fluid rounded-circle mr-3 mb-2" src="{{ person.user.profile.image.url }}" width="100" height="100">
+              <div class="media-body">
+                <a class="account-heading" href="{% url 'public-profile' person.user.id %}"><h2>{{ person.user.username }}</h2></a>
+                  <p class="text-secondary">{{ person.user.email }}</p>
+                  {% if person.is_following %}
+                    <button class="btn" data-url={% url 'unfollow' person.user.id %}>Unfollow</button>
+                  {% else %}
+                    <button class="btn" data-url={% url 'follow' person.user.id %}>Follow</button>
+                  {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="container">
+          {% for person in people2 %}
+              <div class="media mt-4">                
+                <img class="img-fluid rounded-circle mr-3 mb-2" src="{{ person.user.profile.image.url }}" width="100" height="100">
+                <div class="media-body">
+                    <a class="account-heading" href="{% url 'public-profile' person.user.id %}"><h2>{{ person.user.username }}</h2></a>
+                    <p class="text-secondary">{{ person.user.email }}</p>
+                    {% if person.is_following %}
+                      <button class="btn" data-url={% url 'unfollow' person.user.id %}>Unfollow</button>
+                    {% else %}
+                      <button class="btn" data-url={% url 'follow' person.user.id %}>Follow</button>
+                    {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="container">
+          {% for person in people3 %}            
+              <div class="media mt-4">                
+                <img class="img-fluid rounded-circle mr-3 mb-2" src="{{ person.user.profile.image.url }}" width="100" height="100">
+                <div class="media-body">
+                  <a class="account-heading" href="{% url 'public-profile' person.user.id %}"><h2>{{ person.user.username }}</h2></a>
+                    <p class="text-secondary">{{ person.user.email }}</p>
+                    {% if person.is_following %}
+                      <button class="btn" data-url={% url 'unfollow' person.user.id %}>Unfollow</button>
+                    {% else %}
+                      <button class="btn" data-url={% url 'follow' person.user.id %}>Follow</button>
+                    {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
