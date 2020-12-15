@@ -122,6 +122,11 @@ def comment(request, id):
                              'commentc': post.comment_set.all().count()})
 
 
+@login_required
+def about(request):
+    return render(request, 'posts/about.html')
+
+
 class Home(LoginRequiredMixin, ListView):
     template_name = 'posts/home.html'
     paginate_by = 3
@@ -149,17 +154,15 @@ class Home(LoginRequiredMixin, ListView):
                       'likes': Like.objects.filter(post=post).count(),
                       'commentc': post.comment_set.all().count()}
                      for post in self.queryset]
-        # Show 25 contacts per page
+
         paginator = Paginator(list_arts, self.paginate_by)
 
         page = self.request.GET.get('page')
         try:
             arts = paginator.page(page)
         except PageNotAnInteger:
-            # If page is not an integer, deliver first page.
             arts = paginator.page(1)
         except EmptyPage:
-            # If page is out of range (e.g. 9999), deliver last page of results.
             arts = paginator.page(paginator.num_pages)
         context['arts'] = arts
         return context

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from .views import Home, CreatePost, PostDetail, PostEdit, PostDelete, People, public_profile, follow, unfollow, like, unlike, userposts, comments, comment
+from .views import *
 urlpatterns = [
     path('', Home.as_view(), name='insta-home'),
     path('create/', CreatePost.as_view(), name='new-post'),
@@ -17,4 +17,5 @@ urlpatterns = [
     path('comment/<int:id>', comment, name='comment'),
     path('userart/', userposts, name='user-posts'),
     path('profile/<int:id>', public_profile, name='public-profile'),
+    path('about/', about, name='about'),
 ]
